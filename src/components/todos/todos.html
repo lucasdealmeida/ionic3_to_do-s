@@ -1,0 +1,17 @@
+<ion-list>
+  <ion-item>
+    <ion-label>Usuário</ion-label>
+    <ion-select [(ngModel)]="filter">
+      <ion-option *ngFor="let userId of todos | groupBy: 'userId' | keys" value="{{ userId }}">
+        {{ userId }}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+<ion-card *ngFor="let todo of todos | filterBy: ['userId']: filter : true">
+  <ion-card-header>
+    <ion-icon name="thumbs-down" *ngIf="todo.completed"></ion-icon>
+    <ion-icon name="thumbs-up" *ngIf="!todo.completed"></ion-icon>
+     - #{{ todo.userId }} - {{ todo.title }}
+  </ion-card-header>
+</ion-card>
